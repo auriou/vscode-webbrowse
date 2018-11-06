@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <script>
+            function addressGo () { 
+                var addressBar = document.getElementById("addressBar"); 
+                var addressBarValue = addressBar.value;
+                if(!addressBarValue.toLowerCase().startsWith("http")){
+                    addressBarValue = "http://" + addressBarValue;
+                }
+                var browserFrame = document.getElementById("browserFrame"); 
+                browserFrame.src=addressBarValue; 
+                return false;
+            }
+            function searchKeyPress(e)
+            {
+                e = e || window.event;
+                if (e.keyCode == 13)
+                {
+                    document.getElementById('goBtn').click();
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </head>
+    <body style="margin: 0" >
+                    <div >
+                        <input style="width: 80%" id="addressBar" type="text" value="http://localhost" onkeypress="return searchKeyPress(event);" />
+                        <input id="goBtn" class="btn btn-default col-md-1" type="submit" onclick="return addressGo()" value="Go" />
+                    </div>           
+        <iframe id="browserFrame" src="http://localhost" style="position:fixed; top:22px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"> 
+        </iframe>
+    </body>
+</html>
